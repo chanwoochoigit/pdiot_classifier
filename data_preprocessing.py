@@ -14,6 +14,13 @@ def load_and_trim_csv(csv_file_path):
     data = data.drop('remove', axis=1)
     return data
 
+def list_similarity(list1, list2):
+    count = 0
+    for element in list1:
+        if element in list2:
+            count += 1
+    return count
+
 class_dic = {
     'walk_chest_left':          0,
     'walk_chest_right':         1,
@@ -90,23 +97,23 @@ class_dic = {
 
 }
 
-# windowed_data = load_and_trim_csv('training_data_windowed.csv')
-#
-# training_data_processed = []
-#
-# for i in range(len(windowed_data)):
-#     new_line = []
-#     values = string_to_num(windowed_data.iloc[i][0].replace('[','').replace(']','').replace(' ','').split(','))
-#     cls = windowed_data.iloc[i][1]
-#     values.append(cls)
-#     print("progess...{}/{}".format(i,len(windowed_data)))
-#     # print('length: {}, class: {}'.format(len(values),cls))
-#     # print("_____________________________________________")
-#     training_data_processed.append(values)
-# pd.DataFrame(training_data_processed).to_csv('training_data_processed.csv')
+windowed_data = load_and_trim_csv('training_data_windowed_overlapped.csv')
 
-test = pd.read_csv('training_data_processed.csv')
+training_data_processed = []
+
+for i in range(len(windowed_data)):
+    new_line = []
+    values = string_to_num(windowed_data.iloc[i][0].replace('[','').replace(']','').replace(' ','').split(','))
+    cls = windowed_data.iloc[i][1]
+    values.append(cls)
+    print("progess...{}/{}".format(i,len(windowed_data)))
+    # print('length: {}, class: {}'.format(len(values),cls))
+    # print("_____________________________________________")
+    training_data_processed.append(values)
+pd.DataFrame(training_data_processed).to_csv('training_data_overlapped_processed.csv')
+
+test = pd.read_csv('training_data_overlapped_processed.csv')
 test.rename(columns={'Unnamed: 0': 'remove'}, inplace=True)
 final_data = test.drop('remove', axis=1)
-print(final_data)
-final_data.to_csv('training_data_prepared.csv')
+
+final_data.to_csv('training_data_overlapped.csv')
