@@ -14,8 +14,8 @@ print(tdata)
 new_data = []
 class_labels = []
 """set data coefficients"""""""""
-window_size = 36
-overlap_coefficient = 12
+window_size = 16
+overlap_coefficient = 4
 """"""""""""""""""""""""""""""
 value_vector_new = []
 overlap = []
@@ -27,7 +27,7 @@ for i in range(len(tdata)):
         print(value_vector_old)
         value_vector_new.append(value_vector_old)
 
-        if len(value_vector_new) == 36:
+        if len(value_vector_new) == window_size:
             new_data.append(np.array(value_vector_new))
             value_vector_new = []
             class_labels.append(tdata.iloc[i]['class'])
@@ -38,13 +38,15 @@ for i in range(len(tdata)):
 
         print(value_vector_old)
         value_vector_new.append(value_vector_old)
-        if len(value_vector_new) == 36:
+        if len(value_vector_new) == window_size:
             new_data.append(np.array(value_vector_new))
             value_vector_new = []
             class_labels.append(tdata.iloc[idx_overlap]['class'])
-    print("proress...{}/{}".format(len(new_data),round(len(tdata)/36)))
+    print("proress...{}/{}".format(len(new_data),round(len(tdata)/window_size)))
     # print(new_data)
     print("__________________________________")
 
+print(new_data)
+print(class_labels)
 np.save('windowed_data_conv.npy', new_data)
 np.save('class_labels_conv.npy', class_labels)

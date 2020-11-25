@@ -13,18 +13,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.pipeline import Pipeline
 import matplotlib.pyplot as plt
 
-wristList=["walk_wrist_right",
-            'climbing_wrist_right',
-            'descending_wrist_right',
-            'deskwork_wrist_right',
-            'lyingLeft_wrist_right',
-            'lyingRight_wrist_right',
-            'lyingBack_wrist_right',
-            'lyingStomach_wrist_right',
-            'run_wrist_right',
-            'sitForward_wrist_right',
-            'sitBackward_wrist_right',
-            'sitStand_wrist_right'
+wristList=[
             ]
 
 def filter_data(data,classlist):
@@ -150,7 +139,8 @@ print("________________________________________________________")
 """prepare wrist_data"""""""""""""""""
 X_train, X_test, y_train, y_test = train_test_split(x_wrist, y_wrist, test_size=0.2)
 
+print
 # run_advanced_model(X_train, X_test, y_train, y_test)
-run_conv_model(X_train, X_test, y_train, y_test)
+# run_conv_model(X_train, X_test, y_train, y_test)
 # run_target_model(X_train, X_test, y_train, y_test)
 

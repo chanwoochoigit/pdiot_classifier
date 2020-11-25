@@ -98,12 +98,13 @@ class_dic = {
 }
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-windowed_data = np.load('windowed_data_conv.npy')
-class_labels = np.load('class_labels_conv.npy')
-data = np.array(list(zip(windowed_data, class_labels)))
-"""data[i][0]: value vectors of (36,3)"""
-"""data[i][1]: class"""
-print(data)
+
+np.save('simplified_labels_data.npy', data)
+
+
+
+
+
 # windowed_data = pd.read_csv('windowed_data_conv.csv')
 # windowed_data.rename(columns={'Unnamed: 0': 'remove'}, inplace=True)
 # windowed_data = windowed_data.drop('remove', axis=1)
