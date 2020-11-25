@@ -287,33 +287,31 @@ classes = [walk_chest_left, walk_chest_right, walk_pocket_left, walk_pocket_righ
 
 the_big_x = []
 the_big_y = []
+count = 0
 
 for i in range(len(classes)):
+    print('processing...{}/{}'.format(i,len(classes)))
     print(class_titles[i]+'==================================================================================>>>')
-    if "wrist_right" in class_titles[i]: #only using wrist_right data for experiment
-        class_title = class_titles[i]
-        for file in classes[i]:
-            if '2019' in file:
-                print(file)
-                temp = pd.read_csv(file, skiprows=11)
-                print(temp)
-                for j in range(len(temp['accel_x'])):
-                    simple_vector = (temp['accel_x'][j], temp['accel_y'][j], temp['accel_z'][j])
-                    the_big_x.append(simple_vector)
-                    the_big_y.append(class_title)
-            elif '2020' in file:
-                if "s1737472" not in file:
-                    print(file)
-                    temp = pd.read_csv(file, skiprows=5)
-                    print(temp)
-                else:
-                    print(file)
-                    temp = pd.read_csv(file)
-                    print(temp)
-                for j in range(len(temp['accel_x'])):
-                    simple_vector = (temp['accel_x'][j], temp['accel_y'][j], temp['accel_z'][j])
-                    the_big_x.append(simple_vector)
-                    the_big_y.append(class_title)
+    class_title = class_titles[i]
+    for file in classes[i]:
+        # if '2019' in file:
+        #     print(file)
+        #     temp = pd.read_csv(file, skiprows=11)
+        #     # print(temp)
+        #     for j in range(len(temp['accel_x'])):
+        #         simple_vector = (temp['accel_x'][j], temp['accel_y'][j], temp['accel_z'][j])
+        #         the_big_x.append(simple_vector)
+        #         the_big_y.append(class_title)
+        if '2020' in file:
+            print(file)
+            if '1601040201985' in file:
+                print('oops')
+            temp = pd.read_csv(file, skiprows=5)
+            print(temp)
+            for j in range(len(temp['accel_x'])):
+                simple_vector = (temp['accel_x'][j], temp['accel_y'][j], temp['accel_z'][j])
+                the_big_x.append(simple_vector)
+                the_big_y.append(class_title)
 
 print(len(the_big_x))
 print(len(the_big_y))
